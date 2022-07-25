@@ -1,7 +1,6 @@
 public class VariablesTheme {
 
     public static void main(String[] args) {
-        
         System.out.println("\n1. Создание переменных и вывод их значений на консоль");
 
         byte cpuNum = 1;
@@ -30,9 +29,8 @@ public class VariablesTheme {
         System.out.println("Общая стоимость товаров со скидкой: " + (xPrice + yPrice -
                 discountPrice) + " руб.");
 
-        System.out.println("\n3. Вывод на консоль слова JAVA");
+        System.out.println("\n3. Вывод на консоль слова JAVA\n");
 
-        System.out.println("");
         System.out.println("   J    a  v     v  a   ");
         System.out.println("   J   a a  v   v  a a  ");
         System.out.println("J  J  aaaaa  V V  aaaaa ");
@@ -89,41 +87,44 @@ public class VariablesTheme {
 
         System.out.println("\n7. Произведение и сумма цифр числа");
 
-        int n = 345;
-
-        System.out.print("\nПроизведение цифр числа " + n + " = ");
-        System.out.println(n / 100 * (n / 10 % 10) * (n % 10));
-        System.out.print("Сумма цифр числа " + n + " = ");
-        System.out.println(n / 100 + n / 10 % 10 + n % 10);
+        int srcNum = 345;
+        int srcDigit1 = srcNum / 100;
+        int srcDigit2 = srcNum / 10 % 10;
+        int srcDigit3= srcNum % 10;
+        System.out.print("\nПроизведение цифр числа " + srcNum + " = ");
+        System.out.println(srcDigit1 * srcDigit2 * srcDigit3);
+        System.out.print("Сумма цифр числа " + srcNum + " = ");
+        System.out.println(srcDigit1 + srcDigit2 + srcDigit3);
 
         System.out.println("\n8. Отображение количества сотен, десятков и единиц числа");
 
-        n = 123;
-        System.out.println("\nЧисло " + n + " содержит:");
-        System.out.println(n / 100 + " сотен");
-        System.out.println(n / 10 % 10 + " десятков");
-        System.out.println(n % 10 + " единиц");
+        srcNum = 123;
+        srcDigit1 = srcNum / 100;
+        srcDigit2 = srcNum / 10 % 10;
+        srcDigit3= srcNum % 10;
+        System.out.println("\nЧисло " + srcNum + " содержит:");
+        System.out.println(srcDigit1 + " сотен");
+        System.out.println(srcDigit2 + " десятков");
+        System.out.println(srcDigit3 + " единиц");
 
-        System.out.println("\n9. Вывод на консоль ASCII-арт Дюка");
+        System.out.println("\n9. Вывод на консоль ASCII-арт Дюка\n");
 
         char ch0 = ' ';
-
         ch1 = '_';
         ch2 = '/';
         ch3 = '\\';
         ch4 = '(';
         ch5 = ')';
-        System.out.println("");
         System.out.printf("%c%c%c%c%c%c%c%c%c%c\n", ch0, ch0, ch0, ch0, ch2, ch3, ch0, ch0, ch0, ch0);
         System.out.printf("%c%c%c%c%c%c%c%c%c%c\n", ch0, ch0, ch0, ch2, ch0, ch0, ch3, ch0, ch0, ch0);
         System.out.printf("%c%c%c%c%c%c%c%c%c%c\n", ch0, ch0, ch2, ch1, ch4, ch0, ch5, ch3, ch0, ch0);
         System.out.printf("%c%c%c%c%c%c%c%c%c%c\n", ch0, ch2, ch0, ch0, ch0, ch0, ch0, ch0, ch3, ch0);
         System.out.printf("%c%c%c%c%c%c%c%c%c%c\n", ch2, ch1, ch1, ch1, ch1, ch2, ch3, ch1, ch1, ch3);
 
-        System.out.println("\n10. Преобразование секунд");
+        System.out.println("\n10. Преобразование секунд\n");
 
-        n = 86399;
-        System.out.println("\n" + n + " секунд в формате ЧЧ:ММ:СС " + n / 3600 + ":" + (n -
-                (n / 3600) * 60) % 60 + ":" + n % 60);
+        int totalSeconds = 86399;
+        System.out.println(totalSeconds + " секунд в формате ЧЧ:ММ:СС " +
+                totalSeconds / 3600 + ":" + totalSeconds % 3600 / 60 + ":" + totalSeconds % 60);
     }
 }
