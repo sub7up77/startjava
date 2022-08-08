@@ -60,12 +60,9 @@ public class CyclesTheme {
         System.out.print("\nИнтервал (" + num1 + "; " + num2 +"), шаг итерации " + step +
                 ", в каждой строке " + numPerLine + " чисел:\n\n");
         counter = 1;
-        for (int i = num1; i < num1 + numLines * numPerLine * step; i +=step, counter++) {
-            if (i < num2) {
-                System.out.printf("%2d ", i);
-            } else {
-                System.out.printf("%2d ", 0);
-            }
+        num3 = num1 + numLines * numPerLine * step;
+        for (int i = num1; i < num3; i +=step, counter++) {
+            System.out.printf("%2d ", i < num2 ? i : 0);
             if (counter % numPerLine == 0) System.out.println();
         }
 
@@ -79,13 +76,8 @@ public class CyclesTheme {
             if (copySrcNum % 10 == 1) countOnes++;
             copySrcNum /= 10;
         }
-        if (countOnes % 2 == 0) {
-            System.out.println("\nЧисло " + srcNum + " содержит " + countOnes +
-                    " (четное) количество единиц.");
-        } else {
-            System.out.println("\nЧисло " + srcNum + " содержит " + countOnes +
-                    " (нечетное) количество единиц.");
-        }
+        System.out.println("\nЧисло " + srcNum + " содержит " + countOnes +
+                " (" + (countOnes % 2 == 0 ? "" : "не") + "четное) количество единиц.");
 
         System.out.println("\n6.Отображение фигур в консоли\n");
         for (int i = 1; i <= 5; i++) {
@@ -132,60 +124,38 @@ public class CyclesTheme {
         copySrcNum = srcNum;
 
         int reverseNum = 0;
-        int srcNumDigits = 1;
-        
+
         while (copySrcNum > 0) {
-            srcNumDigits *= 10;
+            reverseNum = reverseNum * 10 + copySrcNum % 10;
             copySrcNum /= 10;
         }
-        copySrcNum = srcNum;
-        while (copySrcNum > 0) {
-            reverseNum += copySrcNum % 10 * srcNumDigits / 10;
-            copySrcNum /= 10;
-            srcNumDigits /= 10;
-        }
-        if (srcNum == reverseNum) {
-            System.out.println("\nЧисло " + srcNum + " является палиндромом.");
-        } else {
-            System.out.println("\nЧисло " + srcNum + " не является палиндромом.");
-        }
+        System.out.println("\nЧисло " + srcNum + (srcNum == reverseNum ? "" : " не") +
+                " является палиндромом.");
 
         System.out.println("\n9. Определение, является ли число счастливым");
-        srcNum = 529_344;
+        srcNum = 529_844;
         copySrcNum = srcNum;
-        srcNumDigits = 1;
 
-        int cmpDigits = 3;
-        int cmpFactor = 1;
         int tgtNum1 = 0;
         int tgtNum2 = 0;
         int tgtSumDigits1 = 0;
         int tgtSumDigits2 = 0;
+        int factor = 1;
 
-        for (int i = 1; i <= cmpDigits; i++, cmpFactor *= 10);
-        while (copySrcNum > 0) {
-            srcNumDigits *= 10;
+        while (copySrcNum / 1000 > 0) {
+            tgtNum1 += copySrcNum / 1000 % 10 * factor;
+            tgtSumDigits1 += copySrcNum / 1000 % 10;
+            tgtNum2 += copySrcNum % 10 * factor;
+            tgtSumDigits2 += copySrcNum % 10;
+            factor *= 10;
             copySrcNum /= 10;
         }
-        tgtNum1 = srcNum / (srcNumDigits / cmpFactor);
-        tgtNum2 = srcNum % cmpFactor;
-        do {
-            cmpFactor /= 10;
-            tgtSumDigits1 += tgtNum1 / cmpFactor % 10;
-            tgtSumDigits2 += tgtNum2 / cmpFactor % 10;
-        } while (cmpFactor > 1);
         System.out.println("\nСумма цифр " + tgtNum1 + " = " + tgtSumDigits1 + ".");
         System.out.println("\nСумма цифр " + tgtNum2 + " = " + tgtSumDigits2 + ".");
-        if (tgtSumDigits1 == tgtSumDigits2) {
-            System.out.println("\nЧисло " + srcNum + " является счастливым.");
-        } else {
-            System.out.println("\nЧисло " + srcNum + " не является счастливым.");
-        }
+        System.out.println("\nЧисло " + srcNum + (tgtSumDigits1 == tgtSumDigits2 ? "" : " не") +
+                " является счастливым.");
 
         System.out.println("\n10. Вывод таблицы умножения Пифагора");
-
-        char c;
-
         System.out.printf("\n\n%3c%3c%3c%3c%3c%3c%3c%3c%3c%3c", ' ', '|', '2', '3', '4', '5', '6',
                 '7', '8', '9');
         System.out.printf("\n%3c%3c%3c%3c%3c%3c%3c%3c%3c%3c\n", '-', '+', '-', '-', '-', '-', '-',
