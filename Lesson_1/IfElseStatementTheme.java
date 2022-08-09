@@ -57,16 +57,16 @@ public class IfElseStatementTheme {
 
         System.out.println("\n5. Определение буквы, числа или символа по их коду\n");
 
-        char c = '\u0057';
+        char symb = '\u0057';
 
-        if(c > 96 && c < 123) {
-            System.out.println(c + " это маленькая буква.");
-        } else if(c > 64 && c < 91) {
-            System.out.println(c + " это большая буква.");
-        } else if(c > 47 && c < 58) {
-            System.out.println(c + " это число.");
+        if(symb >= 'a' && symb <= 'z') {
+            System.out.println(symb + " это маленькая буква.");
+        } else if(symb >= 'A' && symb <= 'Z') {
+            System.out.println(symb + " это большая буква.");
+        } else if(symb >= '0' && symb <= '9') {
+            System.out.println(symb + " это число.");
         } else {
-            System.out.println(c + " это не буква и не число.");
+            System.out.println(symb + " это не буква и не число.");
         }
 
         System.out.println("\n6. Определение суммы вклада и начисленных банком %");
@@ -91,20 +91,20 @@ public class IfElseStatementTheme {
         int histGrade;
         int progGrade;
 
-        if(histScore <=60) {
+        if(histScore <= 60) {
             histGrade = 2;
-        } else if(histScore <=73) {
+        } else if(histScore <= 73) {
             histGrade = 3;
-        } else if(histScore <=91) {
+        } else if(histScore <= 91) {
             histGrade = 4;
         } else {
             histGrade = 5;
         }
-        if(progScore <=60) {
+        if(progScore <= 60) {
             progGrade = 2;
-        } else if(progScore <=73) {
+        } else if(progScore <= 73) {
             progGrade = 3;
-        } else if(progScore <=91) {
+        } else if(progScore <= 91) {
             progGrade = 4;
         } else {
             progGrade = 5;
