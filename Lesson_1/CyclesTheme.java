@@ -134,24 +134,20 @@ public class CyclesTheme {
 
         System.out.println("\n9. Определение, является ли число счастливым");
         srcNum = 529_844;
-        copySrcNum = srcNum;
 
-        int tgtNum1 = 0;
-        int tgtNum2 = 0;
+        int tgtNum1 = srcNum / 1000;
+        int tgtNum2 = srcNum % 1000;
         int tgtSumDigits1 = 0;
         int tgtSumDigits2 = 0;
-        int factor = 1;
 
-        while (copySrcNum / 1000 > 0) {
-            tgtNum1 += copySrcNum / 1000 % 10 * factor;
-            tgtSumDigits1 += copySrcNum / 1000 % 10;
-            tgtNum2 += copySrcNum % 10 * factor;
-            tgtSumDigits2 += copySrcNum % 10;
-            factor *= 10;
-            copySrcNum /= 10;
+        while (tgtNum1 > 0) {
+            tgtSumDigits1 += tgtNum1 % 10;
+            tgtSumDigits2 += tgtNum2 % 10;
+            tgtNum1 /= 10;
+            tgtNum2 /= 10;
         }
-        System.out.println("\nСумма цифр " + tgtNum1 + " = " + tgtSumDigits1 + ".");
-        System.out.println("\nСумма цифр " + tgtNum2 + " = " + tgtSumDigits2 + ".");
+        System.out.println("\nСумма цифр " + srcNum / 1000 + " = " + tgtSumDigits1 + ".");
+        System.out.println("\nСумма цифр " + srcNum % 1000 + " = " + tgtSumDigits2 + ".");
         System.out.println("\nЧисло " + srcNum + (tgtSumDigits1 == tgtSumDigits2 ? "" : " не") +
                 " является счастливым.");
 
