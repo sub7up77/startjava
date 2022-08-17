@@ -5,36 +5,38 @@ public class Person {
     boolean isMan;
     String name;
     double height;
-    double weight;
+    int weight;
     int age;
+    String occupation;
 
     boolean isLearnJava() {
         return true;
-    };
+    }
 
     void go() {
         System.out.println("He(She)'s going...");
-    };
+    }
 
     void sit() {
         System.out.println("He(She)'s sitting...");
-    };
+    }
 
     void run() {
         System.out.println("He(She)'s running...");
-    };
+    }
 
     String speak() {
         return "is speaking";
-    };
-
-    public Person(boolean isMan, String name, double height, double weight, int age) {
-        this.isMan = isMan;
-        this.name = name;
-        this.height = height;
-        this.weight = weight;
-        this.age = age;
     }
 
-    Person student = new Person(true, "Michael", 1.82, 76, 22);
+    public static void main(String[] args) {
+        Person visitor = new Person();
+        visitor.isMan = true;
+        visitor.name = "Michael";
+        visitor.height = 1.82;
+        visitor.weight = 76;
+        visitor.age = 22;
+        visitor.occupation = "student";
+    }
+
 }
