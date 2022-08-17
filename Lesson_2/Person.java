@@ -2,12 +2,12 @@ public class Person {
 
     //Создание и инициализация обьекта класса Person
 
-    boolean isMan;
-    String name;
-    double height;
-    int weight;
-    int age;
-    String occupation;
+    boolean isMan = true;
+    String name = "Michael";
+    double height = 1.82;
+    int weight = 76;
+    int age = 22;
+    String occupation = "student";
 
     boolean isLearnJava() {
         return true;
@@ -28,15 +28,4 @@ public class Person {
     String speak() {
         return "is speaking";
     }
-
-    public static void main(String[] args) {
-        Person visitor = new Person();
-        visitor.isMan = true;
-        visitor.name = "Michael";
-        visitor.height = 1.82;
-        visitor.weight = 76;
-        visitor.age = 22;
-        visitor.occupation = "student";
-    }
-
 }
