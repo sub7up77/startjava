@@ -1,11 +1,9 @@
 public class Person {
 
-    //Создание и инициализация обьекта класса Person
-
     boolean isMan = true;
     String name = "Michael";
-    double height = 1.82;
-    int weight = 76;
+    float height = 1.82f;
+    float weight = 76.2f;
     int age = 22;
     String occupation = "student";
 
@@ -14,15 +12,15 @@ public class Person {
     }
 
     void go() {
-        System.out.println("He(She)'s going...");
+        System.out.println("He(She)'s going.");
     }
 
     void sit() {
-        System.out.println("He(She)'s sitting...");
+        System.out.println("He(She)'s sitting.");
     }
 
     void run() {
-        System.out.println("He(She)'s running...");
+        System.out.println("He(She)'s running.");
     }
 
     String speak() {
