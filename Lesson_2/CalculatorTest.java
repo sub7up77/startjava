@@ -7,18 +7,15 @@ public class CalculatorTest {
         String answer;
 
         do {
-            int num1;
-            int num2;
-            char sign;
             System.out.print("\nВведите первое число: ");
-            num1 = in.nextInt();
+            int num1 = in.nextInt();
             System.out.print("Введите знак математической операции: ");
-            sign = in.next().charAt(0);
+            char sign = in.next().charAt(0);
             System.out.print("Введите второе число: ");
-            num2 = in.nextInt();
-            Calculator calculatorOne = new Calculator(num1, sign, num2);
+            int num2 = in.nextInt();
+            Calculator calculator = new Calculator(num1, sign, num2);
             System.out.println(num1 + " " + sign + " " + num2 + " = " +
-                    calculatorOne.calculateExpr() + "\n");
+                    calculator.calculate() + "\n");
             do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
                 answer = in.next();

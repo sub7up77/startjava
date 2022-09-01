@@ -10,32 +10,34 @@ public class Calculator {
         this.num2 = num2;
     }
 
-    public String calculateExpr() {
+    public double calculate() {
         if((num2 == 0) && (sign == '/' || sign == '%')) {
-            return "деление на ноль";
+            System.out.println("Деление на ноль");
+            return 0;
         }
         switch(sign) {
             case '+':
-                return "" + (num1 + num2);
+                return num1 + num2;
             case '-':
-                return "" + (num1 - num2);
+                return num1 - num2;
             case '*':
-                return "" + (num1 * num2);
+                return num1 * num2;
             case '/':
-                return "" + (double) num1 / (double) num2;
+                return (double) num1 / (double) num2;
             case '^':
                 if(num1 == 0) {
-                    return "0";
+                    return 0;
                 }
                 int result = 1;
                 for (int i = 1; i <= num2; i++) {
                     result *= num1;
                 }
-                return "" + result;
+                return result;
             case '%':
-                return "" + num1 % num2;
+                return num1 % num2;
             default:
-                return "неверный знак математической операции";
+                System.out.println("Неверный знак математической операции");
+                return 0;
         }
     }
 }
