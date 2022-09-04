@@ -7,13 +7,14 @@ public class JaegerTest {
         jaeger1.setStatus("Destroyed");
         jaeger1.setHeight(252);
         jaeger1.setWeight(1628);
+
         Jaeger jaeger2 = new Jaeger("Guardian Bravo", "Mark-6", "Active", 240, 1975);
-        jaeger1.selfTest();
+        System.out.println(jaeger1);
         jaeger1.drift();
-        jaeger2.selfTest();
+        System.out.println(jaeger2);
         jaeger2.fight();
         jaeger1.setStatus("Active");
-        jaeger1.selfTest();
+        System.out.println(jaeger1);
         jaeger1.drift();
     }
 }

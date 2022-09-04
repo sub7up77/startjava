@@ -17,6 +17,11 @@ public class Jaeger {
         this.weight = weight;
     }
 
+    public String toString() {
+        return ("\nJaeger: " + modelName + "\nMark: " + mark + "\nStatus: " + status +
+                "\nHeight: " + height + " ft." + "\nWeight: " + weight + " tons");
+    }
+
     public void setModelName(String modelName) {
         this.modelName = modelName;
     }
@@ -41,21 +46,11 @@ public class Jaeger {
         if(status.equals("Active")) {
             System.out.println("I'm drifting ...");
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public void fight() {
         System.out.println("I'm fighting ...");
-    }
-
-    public void selfTest() {
-        System.out.println();
-        System.out.println("Jaeger: " + modelName);
-        System.out.println("Mark: " + mark);
-        System.out.println("Status: " + status);
-        System.out.println("Height: " + height + " ft.");
-        System.out.println("Weight: " + weight + " tons");
     }
 }
