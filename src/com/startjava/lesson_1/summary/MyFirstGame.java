@@ -1,3 +1,5 @@
+package com.startjava.lesson_1.summary;
+
 import java.util.Random;
 
 public class MyFirstGame {
