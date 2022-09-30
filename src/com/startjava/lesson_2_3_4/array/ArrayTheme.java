@@ -72,7 +72,6 @@ public class ArrayTheme {
             } while(isExist(tmp, intArr));
             intArr[i] = tmp;
         }
-        len = intArr.length;
         for (int i = len - 2; i >= 0 ; i--) {
             for (int j = 0; j <= i; j++) {
                 if (intArr[j] > intArr[j + 1]) {
@@ -86,27 +85,25 @@ public class ArrayTheme {
 
         System.out.println("\n6. Сдвиг элементов массива");
         String[] srcStrArr = {"    ", "AA", "", "BBB", "CC", "D", "    ", "E", "FF", "G", ""};
-        int itemsCounter = 0;
-        int srcPos1;
-        int srcPos2 = 0;
-        int destPos = 0;
+        int countStrings = 0;
         for (String str : srcStrArr) {
-            if(!str.isBlank()) itemsCounter++;
+            if(!str.isBlank()) countStrings++;
         }
 
-        String[] destStrArr = new String[itemsCounter];
+        String[] destStrArr = new String[countStrings];
         len = srcStrArr.length;
+        int srcPos2 = 0;
+        int destPos = 0;
         do {
-            srcPos1 = srcPos2;
+            int srcPos1 = srcPos2;
             while(srcPos1 < len && srcStrArr[srcPos1].isBlank()) {
                 srcPos1++;
             }
             if(srcPos1 == len) break;
             srcPos2 = srcPos1;
-            while(srcPos2 < len && !srcStrArr[srcPos2].isBlank()) {
+            while(srcPos2 + 1 < len && !srcStrArr[srcPos2 + 1].isBlank()) {
                 srcPos2++;
             }
-            srcPos2--;
             System.arraycopy(srcStrArr, srcPos1, destStrArr, destPos, srcPos2 - srcPos1 + 1);
             destPos += srcPos2 - srcPos1 + 1;
             srcPos2 = srcPos2 + 1;
@@ -119,13 +116,13 @@ public class ArrayTheme {
 
     private static void printArr(int[] intArr, int numsPerLine) {
         for (int i = 0; i < intArr.length; i++) {
-            System.out.print(intArr[i] + ((i+1) % numsPerLine == 0 ? "\n" : " "));
+            System.out.print(intArr[i] + ((i + 1) % numsPerLine == 0 ? "\n" : " "));
         }
     }
 
     private static void printDoubleArr(double[] doubleArr, int numsPerLine) {
         for (int i = 0; i < doubleArr.length; i++) {
-            System.out.printf("%5.3f%s", doubleArr[i], ((i+1) % numsPerLine == 0 ? "\n" : " "));
+            System.out.printf("%5.3f%s", doubleArr[i], ((i + 1) % numsPerLine == 0 ? "\n" : " "));
         }
     }
 
