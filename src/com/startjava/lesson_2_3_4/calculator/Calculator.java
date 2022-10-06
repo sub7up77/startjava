@@ -1,5 +1,7 @@
 package com.startjava.lesson_2_3_4.calculator;
 
+import static java.lang.Math.*;
+
 public class Calculator {
 
     private int num1;
@@ -27,16 +29,9 @@ public class Calculator {
             case '/':
                 return (double) num1 / (double) num2;
             case '^':
-                if(num1 == 0) {
-                    return 0;
-                }
-                int result = 1;
-                for (int i = 1; i <= num2; i++) {
-                    result *= num1;
-                }
-                return result;
+                return pow(num1, num2);
             case '%':
-                return num1 % num2;
+                return IEEEremainder(num1, num2);
             default:
                 System.out.println("Неверный знак математической операции");
                 return 0;
