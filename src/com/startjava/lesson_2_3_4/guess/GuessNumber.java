@@ -13,18 +13,18 @@ public class GuessNumber {
         this.player2 = player2;
     }
 
-    public void launch(int num_attempts) {
+    public void launch(int numAttempts) {
         Random random = new Random();
         Scanner in = new Scanner(System.in);
         int targetNum = random.nextInt(100) + 1;
         player1.clearAttemps();
         player2.clearAttemps();
         System.out.println();
-        for (int i = 0; i < num_attempts; i++) {
+        for (int i = 0; i < numAttempts; i++) {
             if(isGuessed(player1, in, i, targetNum)) break;
-            if(i == num_attempts - 1) System.out.println("У " + player1.getName() + " закончились попытки");
+            if(i == numAttempts - 1) System.out.println("У " + player1.getName() + " закончились попытки");
             if(isGuessed(player2, in, i, targetNum)) break;
-            if(i == num_attempts - 1) System.out.println("У " + player2.getName() + " закончились попытки");
+            if(i == numAttempts - 1) System.out.println("У " + player2.getName() + " закончились попытки");
         }
         System.out.println();
         player1.printAttemps();

@@ -7,21 +7,21 @@ public class Player {
     private String name;
     private int[] nums;
 
-    public Player(String name, int num_attempts) {
+    public Player(String name, int numAttempts) {
         this.name = name;
-        this.nums = new int[num_attempts];
+        nums = new int[numAttempts];
     }
 
-    public void setNum(int number, int pos) {
-        this.nums[pos] = number;
+    public String getName() {
+        return name;
     }
 
     public int getNum(int pos) {
         return nums[pos];
     }
 
-    public String getName() {
-        return name;
+    public void setNum(int num, int pos) {
+        nums[pos] = num;
     }
 
     public void printAttemps() {
