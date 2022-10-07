@@ -26,9 +26,9 @@ public class Player {
 
     public void printAttemps() {
         int pos = 0;
-        while(pos < this.nums.length && this.nums[pos] != 0) pos++;
+        while(pos < nums.length && nums[pos] != 0) pos++;
         if(pos != 0) {
-            for (int num : Arrays.copyOf(this.nums, pos)) {
+            for (int num : Arrays.copyOf(nums, pos)) {
                 System.out.printf("%-3d", num);
             }
         }
@@ -36,7 +36,7 @@ public class Player {
 
     public void clearAttemps() {
         int pos = 0;
-        while(pos < this.nums.length && this.nums[pos] != 0) pos++;
-        if(pos != 0) Arrays.fill(this.nums,0, pos - 1, 0);
+        while(pos < nums.length && nums[pos] != 0) pos++;
+        if(pos != 0) Arrays.fill(nums,0, pos - 1, 0);
     }
 }
