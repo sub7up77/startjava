@@ -6,37 +6,42 @@ public class Player {
 
     private String name;
     private int[] nums;
+    private int numAttempts;
 
-    public Player(String name, int numAttempts) {
+    public Player(String name) {
         this.name = name;
-        nums = new int[numAttempts];
     }
 
     public String getName() {
         return name;
     }
 
-    public int getNum(int pos) {
-        return nums[pos];
-    }
-
-    public void setNum(int num, int pos) {
-        nums[pos] = num;
-    }
-
-    public void printAttemps() {
-        int pos = 0;
-        while(pos < nums.length && nums[pos] != 0) pos++;
-        if(pos != 0) {
-            for (int num : Arrays.copyOf(nums, pos)) {
-                System.out.printf("%-3d", num);
-            }
+    public int[] getNums() {
+        if(numAttempts != 0) {
+            return Arrays.copyOf(nums, numAttempts);
+        } else {
+            return new int[0];
         }
     }
 
+    public int getNum() {
+        return nums[numAttempts - 1];
+    }
+
+    public void setNumsDim(int num) {
+        nums = new int[num];
+        numAttempts = 0;
+    }
+    public void setNum(int num) {
+        nums[numAttempts] = num;
+        numAttempts++;
+    }
+
+    public int getNumAttempts() {
+        return numAttempts;
+    }
+
     public void clearAttemps() {
-        int pos = 0;
-        while(pos < nums.length && nums[pos] != 0) pos++;
-        if(pos != 0) Arrays.fill(nums,0, pos - 1, 0);
+        if(numAttempts != 0) Arrays.fill(nums,0, numAttempts - 1, 0);
     }
 }
