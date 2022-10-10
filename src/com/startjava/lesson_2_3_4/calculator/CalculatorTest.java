@@ -6,22 +6,57 @@ import static java.lang.Integer.parseInt;
 public class CalculatorTest {
 
     public static void main(String[] args) {
+
         Scanner in = new Scanner(System.in);
-        String answer;
+        String input;
 
         do {
-            System.out.print("\nВведите математическое выражение: ");
-            String[] words = in.nextLine().split(" ");
-            int num1 = parseInt(words[0]);
-            char sign = words[1].charAt(0);
-            int num2 = parseInt(words[2]);
-            Calculator calculator = new Calculator(num1, sign, num2);
-            System.out.println(num1 + " " + sign + " " + num2 + " = " +
-                    calculator.calculate() + "\n");
+            String[] str;
+            do {
+                System.out.print("\nВведите математическое выражение, разделители - пробелы: ");
+                input = in.nextLine();
+                str = input.split(" ");
+            } while(!isPermitted(str));
+            System.out.println(input + " = " + Calculator.calculate(str) + "\n");
             do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-                answer = in.nextLine();
-            } while(!answer.equals("yes") && !answer.equals("no"));
-        } while(answer.equals("yes"));
+                input = in.nextLine();
+            } while(!input.equals("yes") && !input.equals("no"));
+        } while(input.equals("yes"));
+    }
+
+    private static int getNum(String str) {
+        try {
+            int num = parseInt(str);
+            if(num <= 0) {
+                System.out.println("Операнды должны быть положительными числами");
+                return 0;
+            } else {
+                return num;
+            }
+        } catch(NumberFormatException ex) {
+            System.out.println("Операнд не является числом");
+            return 0;
+        }
+    }
+
+    private static boolean isSign(String str) {
+        char[] sign = {'+', '-', '*', '/', '^', '%'};
+        for (char ch : sign) {
+            if(str.charAt(0) == ch) {
+                return true;
+            }
+        }
+        System.out.println("Недопустимый знак математической операции");
+        return false;
+    }
+
+    private static boolean isPermitted(String[] str) {
+        if (str.length != 3 || str[1].equals("") || getNum(str[0]) == 0 || !isSign(str[1]) || getNum(str[2]) == 0) {
+            System.out.println("Недопустимое математическое выражение");
+            return false;
+        } else {
+            return true;
+        }
     }
 }

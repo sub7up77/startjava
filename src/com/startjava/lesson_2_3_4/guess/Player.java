@@ -17,11 +17,7 @@ public class Player {
     }
 
     public int[] getNums() {
-        if(numAttempts != 0) {
-            return Arrays.copyOf(nums, numAttempts);
-        } else {
-            return new int[0];
-        }
+        return Arrays.copyOf(nums, numAttempts);
     }
 
     public int getNum() {
@@ -32,7 +28,8 @@ public class Player {
         nums = new int[num];
         numAttempts = 0;
     }
-    public void setNum(int num) {
+
+    public void addNum(int num) {
         nums[numAttempts] = num;
         numAttempts++;
     }
@@ -42,6 +39,6 @@ public class Player {
     }
 
     public void clearAttemps() {
-        if(numAttempts != 0) Arrays.fill(nums,0, numAttempts - 1, 0);
+        if(numAttempts != 0) Arrays.fill(nums,0, numAttempts, 0);
     }
 }

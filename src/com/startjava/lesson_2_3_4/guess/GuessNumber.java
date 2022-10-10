@@ -19,35 +19,44 @@ public class GuessNumber {
         System.out.println("\nУ каждого игрока по " + NUM_ATTEMPTS + " попыток");
         player1.setNumsDim(NUM_ATTEMPTS);
         player2.setNumsDim(NUM_ATTEMPTS);
-        Random random = new Random();
+        init();
         Scanner in = new Scanner(System.in);
-        targetNum = random.nextInt(100) + 1;
-        player1.clearAttemps();
-        player2.clearAttemps();
-        System.out.println();
         for (int i = 0; i < NUM_ATTEMPTS; i++) {
             if(isGuessed(player1, in)) break;
             if(isGuessed(player2, in)) break;
         }
-        printNums(player1.getNums());
-        printNums(player2.getNums());
+        printNums(player1);
+        printNums(player2);
+    }
+
+    private void init() {
+        Random random = new Random();
+        targetNum = random.nextInt(100) + 1;
+        player1.clearAttemps();
+        player2.clearAttemps();
+        System.out.println();
     }
 
     private boolean isGuessed(Player player, Scanner in) {
-        System.out.print(player.getName() + ", введите предполагаемое число в интервале (0,100]: ");
-        player.setNum(in.nextInt());
+        String name = player.getName();
+        System.out.print(name + ", введите предполагаемое число в интервале (0,100]: ");
+        player.addNum(in.nextInt());
         if(compareNums(player.getNum())) {
-            System.out.println("\n" + player.getName() + " угадал число " + targetNum + " с " +
+            System.out.println("\n" + name + " угадал число " + targetNum + " с " +
                     player.getNumAttempts() + " попытки");
             return true;
         }
-        if(player.getNumAttempts() == NUM_ATTEMPTS) System.out.println("У " + player.getName() +
-                " закончились попытки");
+        if(player.getNumAttempts() == NUM_ATTEMPTS) {
+            System.out.println("У " + name + " закончились попытки");
+        }
         return false;
     }
 
     private boolean compareNums(int num) {
-        if(num != targetNum) {
+        if(num <= 0 || num > 100) {
+            System.out.println("Введенное число вне заданного интервала");
+            return false;
+        } else if(num != targetNum) {
             System.out.println("Число " + num + (num < targetNum ? " меньше" : " больше") +
                     " того, что загадал компьютер");
             return false;
@@ -55,10 +64,11 @@ public class GuessNumber {
         return true;
     }
 
-    private void printNums(int[] nums) {
+    private void printNums(Player player) {
         System.out.println();
-        if (nums.length != 0) {
-            for (int num : nums) {
+        if (player.getNums().length != 0) {
+            System.out.print(player.getName() + ": ");
+            for (int num : player.getNums()) {
                 System.out.printf("%-3d", num);
             }
         }
