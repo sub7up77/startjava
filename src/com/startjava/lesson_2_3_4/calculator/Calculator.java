@@ -8,55 +8,28 @@ public class Calculator {
     private static char sign;
     private static int num2;
 
-    public static boolean isCorrectExpression(String expression) {
+    private static void setNums(String str1, String str2) {
+        num1 = parseInt(str1);
+        num2 = parseInt(str2);
+    }
+
+    private static void setSign(String str) {
+        sign = str.charAt(0);
+    }
+
+    public static double calculate(String expression) throws Exception {
         String[] str = expression.split(" ");
 
-        if (str.length != 3 || str[1].equals("") || !setSign(str[1]) || !setNums(str[0], str[2])) {
-            System.out.println("Недопустимое математическое выражение");
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private static boolean setNums(String str1, String str2) {
-        try {
-            num1 = parseInt(str1);
-            num2 = parseInt(str2);
-            if(num1 <= 0 || num2 <= 0) {
-                System.out.println("Операнды должны быть положительными числами");
-                return false;
-            } else {
-                return true;
-            }
-        } catch(NumberFormatException ex) {
-            System.out.println("Операнд не является числом");
-            return false;
-        }
-    }
-
-    private static boolean setSign(String str) {
-        char[] signs = {'+', '-', '*', '/', '^', '%'};
-
-        for (char ch : signs) {
-            if(ch == str.charAt(0)) {
-                sign = ch;
-                return true;
-            }
-        }
-        System.out.println("Недопустимый знак математической операции");
-        return false;
-    }
-
-    public static double calculate() {
-        return switch(sign) {
+        setNums(str[0], str[2]);
+        setSign(str[1]);
+        return switch (sign) {
             case '+' -> num1 + num2;
             case '-' -> num1 - num2;
             case '*' -> num1 * num2;
             case '/' -> (double) num1 / (double) num2;
             case '^' -> pow(num1, num2);
             case '%' -> IEEEremainder(num1, num2);
-            default -> 0;
+            default ->  throw new Exception();
         };
     }
 }

@@ -7,6 +7,7 @@ public class Player {
     private String name;
     private int[] nums;
     private int numAttempts;
+    private int numWonGames;
 
     public Player(String name) {
         this.name = name;
@@ -16,29 +17,49 @@ public class Player {
         return name;
     }
 
-    public int[] getNums() {
-        return Arrays.copyOf(nums, numAttempts);
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getNum() {
         return nums[numAttempts - 1];
     }
 
-    public void setNumsDim(int num) {
-        nums = new int[num];
-        numAttempts = 0;
+    public boolean addNum(int num) {
+        if(num <= 0 || num > 100) {
+            System.out.println("Введенное число вне заданного интервала (0, 100]");
+            return false;
+        } else {
+            nums[numAttempts] = num;
+            numAttempts++;
+            return true;
+        }
     }
 
-    public void addNum(int num) {
-        nums[numAttempts] = num;
-        numAttempts++;
+    public int[] getNums() {
+        return Arrays.copyOf(nums, numAttempts);
+    }
+
+    public void setNumsDim(int num) {
+        nums = new int[num];
     }
 
     public int getNumAttempts() {
         return numAttempts;
     }
 
-    public void clearAttemps() {
-        if(numAttempts != 0) Arrays.fill(nums,0, numAttempts, 0);
+    public void clearAttempts() {
+        if(numAttempts != 0) {
+            Arrays.fill(nums,0, numAttempts, 0);
+            numAttempts = 0;
+        }
+    }
+
+    public int getNumWonGames() {
+        return numWonGames;
+    }
+
+    public void addNumWonGames() {
+        numWonGames++;
     }
 }

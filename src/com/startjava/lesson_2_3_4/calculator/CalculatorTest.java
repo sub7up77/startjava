@@ -9,11 +9,17 @@ public class CalculatorTest {
         String expression;
 
         do {
+            boolean isCorrectExpression = false;
             do {
-                System.out.print("\nВведите математическое выражение, разделители - пробелы: ");
-                expression = in.nextLine();
-            } while(!Calculator.isCorrectExpression(expression));
-            System.out.println(expression + " = " + Calculator.calculate() + "\n");
+                try {
+                    System.out.print("\nВведите математическое выражение, разделители - пробелы: ");
+                    expression = in.nextLine();
+                    System.out.println(expression + " = " + Calculator.calculate(expression) + "\n");
+                    isCorrectExpression = true;
+                } catch(Exception ex) {
+                    System.out.println("Недопустимое математическое выражение");
+                }
+            } while(!isCorrectExpression);
             do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
                 expression = in.nextLine();

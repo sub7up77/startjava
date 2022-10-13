@@ -7,43 +7,50 @@ public class GuessNumber {
 
     private static final int NUM_ATTEMPTS = 10;
     private int targetNum;
-    private Player player1;
-    private Player player2;
+    private Player[] player;
 
-    public GuessNumber(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public GuessNumber(Player... players) {
+        player = players;
+        for (Player value : player) {
+            value.setNumsDim(NUM_ATTEMPTS);
+        }
     }
 
-    public void launch() {
-        System.out.println("\nУ каждого игрока по " + NUM_ATTEMPTS + " попыток");
-        player1.setNumsDim(NUM_ATTEMPTS);
-        player2.setNumsDim(NUM_ATTEMPTS);
+    public void launch(int numRound) {
+        System.out.println("\nРаунд " + numRound);
+        System.out.println("У каждого игрока по " + NUM_ATTEMPTS + " попыток");
         init();
         Scanner in = new Scanner(System.in);
+        outer:
         for (int i = 0; i < NUM_ATTEMPTS; i++) {
-            if(isGuessed(player1, in)) break;
-            if(isGuessed(player2, in)) break;
+            for (Player value : player) {
+                if(isGuessed(value, in)) break outer;
+            }
         }
-        printNums(player1);
-        printNums(player2);
+        for (Player value : player) {
+            printNums(value);
+        }
+        System.out.println();
     }
 
     private void init() {
         Random random = new Random();
         targetNum = random.nextInt(100) + 1;
-        player1.clearAttemps();
-        player2.clearAttemps();
+        for (Player value : player) {
+            value.clearAttempts();
+        }
         System.out.println();
     }
 
     private boolean isGuessed(Player player, Scanner in) {
         String name = player.getName();
-        System.out.print(name + ", введите предполагаемое число в интервале (0,100]: ");
-        player.addNum(in.nextInt());
+        System.out.print(name + ", введите предполагаемое число в интервале (0, 100]: ");
+        while(!player.addNum(in.nextInt())) {
+        }
         if(compareNums(player.getNum())) {
-            System.out.println("\n" + name + " угадал число " + targetNum + " с " +
+            System.out.println("\n" + name + " угадал(а) число " + targetNum + " с " +
                     player.getNumAttempts() + " попытки");
+            player.addNumWonGames();
             return true;
         }
         if(player.getNumAttempts() == NUM_ATTEMPTS) {
@@ -53,15 +60,13 @@ public class GuessNumber {
     }
 
     private boolean compareNums(int num) {
-        if(num <= 0 || num > 100) {
-            System.out.println("Введенное число вне заданного интервала");
-            return false;
-        } else if(num != targetNum) {
+        if(num != targetNum) {
             System.out.println("Число " + num + (num < targetNum ? " меньше" : " больше") +
                     " того, что загадал компьютер");
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     private void printNums(Player player) {
