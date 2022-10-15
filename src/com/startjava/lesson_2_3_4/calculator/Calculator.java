@@ -4,24 +4,13 @@ import static java.lang.Math.*;
 import static java.lang.Integer.parseInt;
 
 public class Calculator {
-    private static int num1;
-    private static char sign;
-    private static int num2;
-
-    private static void setNums(String str1, String str2) {
-        num1 = parseInt(str1);
-        num2 = parseInt(str2);
-    }
-
-    private static void setSign(String str) {
-        sign = str.charAt(0);
-    }
 
     public static double calculate(String expression) throws Exception {
-        String[] str = expression.split(" ");
+        String[] mathExpression = expression.split(" ");
+        int num1 = parseInt(mathExpression[0]);
+        char sign = mathExpression[1].charAt(0);
+        int num2 = parseInt(mathExpression[2]);
 
-        setNums(str[0], str[2]);
-        setSign(str[1]);
         return switch (sign) {
             case '+' -> num1 + num2;
             case '-' -> num1 - num2;

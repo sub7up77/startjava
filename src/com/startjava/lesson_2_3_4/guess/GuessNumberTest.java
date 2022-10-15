@@ -39,9 +39,9 @@ public class GuessNumberTest {
         for (int i = players.length - 1; i >= 1; i--) {
             int j = random.nextInt(i + 1);
             if(i != j) {
-                String str = players[i].getName();
+                String tmp = players[i].getName();
                 players[i].setName(players[j].getName());
-                players[j].setName(str);
+                players[j].setName(tmp);
             }
         }
     }

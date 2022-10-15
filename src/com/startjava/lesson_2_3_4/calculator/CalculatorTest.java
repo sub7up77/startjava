@@ -7,6 +7,7 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String expression;
+        String answer;
 
         do {
             boolean isCorrectExpression = false;
@@ -22,8 +23,8 @@ public class CalculatorTest {
             } while(!isCorrectExpression);
             do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-                expression = in.nextLine();
-            } while(!expression.equals("yes") && !expression.equals("no"));
-        } while(expression.equals("yes"));
+                answer = in.nextLine();
+            } while(!answer.equals("yes") && !answer.equals("no"));
+        } while(answer.equals("yes"));
     }
 }
