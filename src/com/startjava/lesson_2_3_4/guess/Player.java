@@ -7,10 +7,11 @@ public class Player {
     private String name;
     private int[] nums;
     private int numAttempts;
-    private int numWonGames;
+    private int numWins;
 
     public Player(String name) {
         this.name = name;
+        nums = new int[GuessNumber.NUM_ATTEMPTS];
     }
 
     public String getName() {
@@ -29,19 +30,15 @@ public class Player {
         if(num <= 0 || num > 100) {
             System.out.println("Введенное число вне заданного интервала (0, 100]");
             return false;
-        } else {
-            nums[numAttempts] = num;
-            numAttempts++;
-            return true;
         }
+        nums[numAttempts] = num;
+        numAttempts++;
+        return true;
+
     }
 
     public int[] getNums() {
         return Arrays.copyOf(nums, numAttempts);
-    }
-
-    public void setNumsDim(int num) {
-        nums = new int[num];
     }
 
     public int getNumAttempts() {
@@ -55,11 +52,11 @@ public class Player {
         }
     }
 
-    public int getNumWonGames() {
-        return numWonGames;
+    public int getNumWins() {
+        return numWins;
     }
 
-    public void addNumWonGames() {
-        numWonGames++;
+    public void addNumWins() {
+        numWins++;
     }
 }
