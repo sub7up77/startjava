@@ -9,72 +9,73 @@ public class GuessNumber {
     private static final int NUM_ROUNDS = 3;
 
     private int targetNum;
-    private Player[] player;
+    private Player[] players;
 
     public GuessNumber(Player... players) {
-        player = players;
+        this.players = players;
     }
 
     public void launch() {
-        shufflePlayers(player);
+        Scanner in = new Scanner(System.in);
+
+        shufflePlayers();
         for (int i = 1; i <= NUM_ROUNDS; i++) {
             System.out.println("\nРаунд " + i);
             System.out.println("У каждого игрока по " + NUM_ATTEMPTS + " попыток");
-            init();
-            Scanner in = new Scanner(System.in);
-            outer:
-            for (int j = 0; j < NUM_ATTEMPTS; j++) {
-                for (Player value : player) {
-                    if (isGuessed(value, in)) break outer;
-                }
-            }
-            for (Player value : player) {
-                printNums(value);
-            }
-            System.out.println();
+            initRound();
+            startRound(in);
+            printNums();
         }
         int maxNumWins = 0;
-        for (Player value : player ) {
-            if(maxNumWins < value.getNumWins()) maxNumWins = value.getNumWins();
+        for (Player player : players) {
+            if(maxNumWins < player.getNumWins()) maxNumWins = player.getNumWins();
         }
-        for (Player value : player ) {
-            if(maxNumWins == value.getNumWins()) {
-                System.out.println("\n" + value.getName() + " - победитель, побед в раундах: " + maxNumWins);
+        System.out.println();
+        for (Player player : players) {
+            if(maxNumWins == player.getNumWins()) {
+                System.out.println(player.getName() + " - победитель, побед в раундах: " + maxNumWins);
             }
         }
     }
 
-    private static void shufflePlayers(Player... players) {
+    private void shufflePlayers() {
         Random random = new Random();
-
         for (int i = players.length - 1; i >= 1; i--) {
             int j = random.nextInt(i + 1);
             if(i != j) {
-                String tmp = players[i].getName();
-                players[i].setName(players[j].getName());
-                players[j].setName(tmp);
+                Player tmp = players[i];
+                players[i] = players[j];
+                players[j] = tmp;
             }
         }
     }
 
-    private void init() {
+    private void initRound() {
         Random random = new Random();
         targetNum = random.nextInt(100) + 1;
-        for (Player value : player) {
-            value.clearAttempts();
+        for (Player player : players) {
+            player.clearAttempts();
         }
         System.out.println();
     }
 
+    private void startRound(Scanner in) {
+        for (int j = 0; j < NUM_ATTEMPTS; j++) {
+            for (Player player : players) {
+                if (isGuessed(player, in)) return;
+            }
+        }
+    }
+
     private boolean isGuessed(Player player, Scanner in) {
         String name = player.getName();
-        System.out.print(name + ", введите предполагаемое число в интервале (0, 100]: ");
-        while(!player.addNum(in.nextInt())) {
-        }
+        do {
+            System.out.print(name + ", введите предполагаемое число в интервале (0, 100]: ");
+        } while(!player.addNum(in.nextInt()));
         if(compareNums(player.getNum())) {
             System.out.println("\n" + name + " угадал(а) число " + targetNum + " с " +
                     player.getNumAttempts() + " попытки");
-            player.addNumWins();
+            player.incNumWins();
             return true;
         }
         if(player.getNumAttempts() == NUM_ATTEMPTS) {
@@ -92,13 +93,16 @@ public class GuessNumber {
         return true;
     }
 
-    private void printNums(Player player) {
-        System.out.println();
-        if (player.getNums().length != 0) {
-            System.out.print(player.getName() + ": ");
-            for (int num : player.getNums()) {
-                System.out.printf("%-3d", num);
+    private void printNums() {
+        for (Player player : players) {
+            System.out.println();
+            if (player.getNums().length != 0) {
+                System.out.print(player.getName() + ": ");
+                for (int num : player.getNums()) {
+                    System.out.printf("%-3d", num);
+                }
             }
         }
+        System.out.println();
     }
 }

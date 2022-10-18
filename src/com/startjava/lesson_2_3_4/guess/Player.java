@@ -18,10 +18,6 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getNum() {
         return nums[numAttempts - 1];
     }
@@ -34,7 +30,6 @@ public class Player {
         nums[numAttempts] = num;
         numAttempts++;
         return true;
-
     }
 
     public int[] getNums() {
@@ -56,7 +51,7 @@ public class Player {
         return numWins;
     }
 
-    public void addNumWins() {
+    public void incNumWins() {
         numWins++;
     }
 }
