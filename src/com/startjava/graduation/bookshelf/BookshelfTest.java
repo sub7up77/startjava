@@ -5,26 +5,29 @@ import java.util.Scanner;
 public class BookshelfTest {
 
     public static void main(String[] args) {
+        Bookshelf bookshelf = new Bookshelf();
         Scanner in = new Scanner(System.in);
-        String  answer;
+        String answer;
 
         do {
+            showBookshelf(bookshelf);
             showMenu();
             answer = in.nextLine();
             switch(answer) {
                 case "1" -> {
-                    System.out.println("Введите название книги: ");
-                    System.out.println(Bookshelf.findBook(in.nextLine()));
+                    System.out.print("Введите название книги: ");
+                    Book book = bookshelf.findBook(in.nextLine());
+                    if (book != null) System.out.println(book);
                 }
                 case "2" -> {
-                        System.out.println("Введите название книги в формате: <Автор> <Название> <Год выхода> ");
-                        System.out.println(Bookshelf.addBook(in.nextLine()));
+                    System.out.print("Введите название книги в формате: <Автор> <Название> <Год выхода> ");
+                    bookshelf.addBook(in.nextLine());
                 }
                 case "3" -> {
-                    System.out.println("Введите название книги, которую хотите удалить:");
-                    System.out.println(Bookshelf.delBook(in.nextLine()));
+                    System.out.print("Введите название книги, которую хотите удалить:");
+                    bookshelf.delBook(in.nextLine());
                 }
-                case "4" -> System.out.println(Bookshelf.cleanBookshelf());
+                case "4" -> bookshelf.cleanBookshelf();
                 case "5" -> {}
                 default ->  System.out.println("Повторите выбор.");
             }
@@ -32,30 +35,33 @@ public class BookshelfTest {
         } while(!answer.equals("5"));
     }
 
-    private static void showMenu() {
-        if(Bookshelf.getBooksTotal() == 0) {
+    public static void showBookshelf(Bookshelf bookshelf) {
+        if(bookshelf.getBooksTotal() == 0) {
             System.out.println("\nШкаф пуст. Вы можете добавить в него первую книгу.");
         } else {
-            System.out.println("\nШкаф содержит книг: " + Bookshelf.getBooksTotal() + ". Свободно полок: " +
-                    Bookshelf.getNumFreeShelves() + ".\n");
-            int maxLenArrMember = 0;
-            for (Book book : Bookshelf.getBooks()) {
-                if(maxLenArrMember < book.toString().length()) maxLenArrMember = book.toString().length();
+            System.out.println("\nШкаф содержит книг: " + bookshelf.getBooksTotal() + ". Свободно полок: " +
+                    bookshelf.getNumFreeShelves() + ".\n");
+            int maxLenBookDetails = bookshelf.getMaxLenBookDetails();
+            for (Book book : bookshelf.getBooks()) {
+                System.out.println("|" + book.toString() +
+                        " ".repeat(maxLenBookDetails - book.toString().length()) + "|");
+                System.out.println("|" + "-".repeat(maxLenBookDetails) + "|");
             }
-            for (Book book : Bookshelf.getBooks()) {
-                System.out.println("|" + book.toString() + " ".repeat(maxLenArrMember - book.toString().length()) + "|");
-                System.out.println("|" + "-".repeat(maxLenArrMember) + "|");
-            }
-            if(Bookshelf.getNumFreeShelves() !=0) System.out.println("|" + " ".repeat(maxLenArrMember) + "|");
+            if(bookshelf.getNumFreeShelves() !=0) System.out.println("|" + " ".repeat(maxLenBookDetails) + "|");
         }
-        System.out.println("""
+    }
+
+    public static void showMenu() {
+        System.out.print("""
                             
-                            1. Найти книгу
-                            2. Добавить книгу
-                            3. Удалить книгу
-                            4. Очистить шкаф
-                            5. Выйти из программы
-                            """);
+                             1. Найти книгу
+                             2. Добавить книгу
+                             3. Удалить книгу
+                             4. Очистить шкаф
+                             5. Выйти из программы
+                            
+                         """);
+        System.out.print("Введите номер команды: ");
     }
 
     private static void pressEnter(Scanner in) {
