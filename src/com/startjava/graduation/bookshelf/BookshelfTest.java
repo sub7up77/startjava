@@ -16,18 +16,23 @@ public class BookshelfTest {
             switch(answer) {
                 case "1" -> {
                     System.out.print("Введите название книги: ");
-                    Book book = bookshelf.findBook(in.nextLine());
+                    Book book = bookshelf.find(in.nextLine());
                     if (book != null) System.out.println(book);
                 }
                 case "2" -> {
                     System.out.print("Введите название книги в формате: <Автор> <Название> <Год выхода> ");
-                    bookshelf.addBook(in.nextLine());
+                    try {
+                        String[] bookDetails = in.nextLine().split(" ");
+                        bookshelf.add(new Book(bookDetails[0], bookDetails[1], Integer.parseInt(bookDetails[2])));
+                    } catch(Exception ex) {
+                        System.out.println("Недопустимый формат.");
+                    }
                 }
                 case "3" -> {
                     System.out.print("Введите название книги, которую хотите удалить:");
-                    bookshelf.delBook(in.nextLine());
+                    bookshelf.del(in.nextLine());
                 }
-                case "4" -> bookshelf.cleanBookshelf();
+                case "4" -> bookshelf.clearBookshelf();
                 case "5" -> {}
                 default ->  System.out.println("Повторите выбор.");
             }
@@ -36,10 +41,10 @@ public class BookshelfTest {
     }
 
     public static void showBookshelf(Bookshelf bookshelf) {
-        if(bookshelf.getBooksTotal() == 0) {
+        if(bookshelf.getCountBooks() == 0) {
             System.out.println("\nШкаф пуст. Вы можете добавить в него первую книгу.");
         } else {
-            System.out.println("\nШкаф содержит книг: " + bookshelf.getBooksTotal() + ". Свободно полок: " +
+            System.out.println("\nШкаф содержит книг: " + bookshelf.getCountBooks() + ". Свободно полок: " +
                     bookshelf.getNumFreeShelves() + ".\n");
             int maxLenBookDetails = bookshelf.getMaxLenBookDetails();
             for (Book book : bookshelf.getBooks()) {
