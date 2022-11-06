@@ -48,11 +48,11 @@ public class BookshelfTest {
                     bookshelf.getNumFreeShelves() + ".\n");
             int maxLenBookDetails = bookshelf.getMaxLenBookDetails();
             for (Book book : bookshelf.getBooks()) {
-                System.out.println("|" + book.toString() +
+                System.out.println("|" + book +
                         " ".repeat(maxLenBookDetails - book.toString().length()) + "|");
                 System.out.println("|" + "-".repeat(maxLenBookDetails) + "|");
             }
-            if(bookshelf.getNumFreeShelves() !=0) System.out.println("|" + " ".repeat(maxLenBookDetails) + "|");
+            if(bookshelf.getNumFreeShelves() != 0) System.out.println("|" + " ".repeat(maxLenBookDetails) + "|");
         }
     }
 

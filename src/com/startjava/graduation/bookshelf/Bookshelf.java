@@ -26,20 +26,8 @@ public class Bookshelf {
     }
 
     public Book find(String title) {
-        if(countBooks == 0) {
-            System.out.println("Шкаф пуст.");
-            return null;
-        }
-        if(title.isBlank()) {
-            System.out.println("Вы не ввели название книги.");
-            return null;
-        }
-        for (int i = 0; i < countBooks; i++) {
-            if(title.equals(books[i].getTitle())) {
-                return new Book(books[i].getAuthor(), books[i].getTitle(), books[i].getPublishYear());
-            }
-        }
-        System.out.println("Книга не найдена.");
+        int index = getBookIndex(title);
+        if(index != -1) return new Book(books[index].getAuthor(), books[index].getTitle(), books[index].getPublishYear());
         return null;
     }
 
@@ -63,35 +51,24 @@ public class Bookshelf {
         books[countBooks] = book;
         countBooks++;
         int len = book.toString().length();
-        if(maxLenBookDetails < len)  maxLenBookDetails = len;
+        if(len > maxLenBookDetails)  maxLenBookDetails = len;
         System.out.println("Книга добавлена.");
     }
 
     public void del(String title) {
-        if(countBooks == 0) {
-            System.out.println("Шкаф пуст.");
-            return;
-        }
-        if(title.isBlank()) {
-            System.out.println("Вы не ввели название книги.");
-            return;
-        }
-        for (int i = 0; i < countBooks; i++) {
-            if(title.equals(books[i].getTitle())) {
-                int len = books[i].toString().length();
-                if(i == countBooks - 1) {
-                    books[i] = null;
-                } else {
-                    System.arraycopy(books, i + 1, books, i, countBooks - 1 - i);
-                    books[countBooks - 1] = null;
-                }
-                countBooks--;
-                if(len == maxLenBookDetails) setMaxLenBookDetails();
-                System.out.println("Книга удалена.");
-                return;
+        int index = getBookIndex(title);
+        if(index != -1) {
+            int len = books[index].toString().length();
+            if (index == countBooks - 1) {
+                books[index] = null;
+            } else {
+                System.arraycopy(books, index + 1, books, index, countBooks - 1 - index);
+                books[countBooks - 1] = null;
             }
+            countBooks--;
+            if (len == maxLenBookDetails) setMaxLenBookDetails();
+            System.out.println("Книга удалена.");
         }
-        System.out.println("Книга не найдена.");
     }
 
     public void clearBookshelf() {
@@ -109,15 +86,33 @@ public class Bookshelf {
         return SHELVES_LIMIT - countBooks;
     }
 
+    private int getBookIndex(String title) {
+        if(countBooks == 0) {
+            System.out.println("Шкаф пуст.");
+            return -1;
+        }
+        if(title.isBlank()) {
+            System.out.println("Вы не ввели название книги.");
+            return -1;
+        }
+        for (int i = 0; i < countBooks; i++) {
+            if(title.equals(books[i].getTitle())) {
+                return i;
+            }
+        }
+        System.out.println("Книга не найдена.");
+        return -1;
+    }
+
     private void setMaxLenBookDetails() {
         if(countBooks == 0) {
             maxLenBookDetails = 0;
             return;
         }
         int maxLen = 0;
-        for (int i = 0; i <= countBooks - 1; i++) {
+        for (int i = 0; i < countBooks ; i++) {
             int len = books[i].toString().length();
-            if(maxLen < len) maxLen = len;
+            if(len > maxLen) maxLen = len;
         }
         maxLenBookDetails = maxLen;
     }
